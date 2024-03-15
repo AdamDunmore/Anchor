@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 595.3 841.9" style="enable-background:new 0 0 595.3 841.9;" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style type="text/css">
+	.st0{fill:none;stroke:#FFFFFF;stroke-width:13;stroke-linecap:round;stroke-miterlimit:10;}
+	.st1{fill:none;stroke:#FFFFFF;stroke-width:8;stroke-linecap:round;stroke-miterlimit:10;}
+	.st2{fill:none;stroke:#FFFFFF;stroke-width:8;stroke-linecap:round;stroke-linejoin:round;}
+</style>
+  </defs>
+  <g transform="matrix(1, 0, 0, 1, -1.1368683772161603e-13, 0)">
+    <g style="" transform="matrix(6.31285, 0, 0, 6.31285, -1588.580688, -2340.885254)">
+      <line class="st0" x1="297.1" y1="453.3" x2="297.1" y2="407.4"/>
+      <circle class="st1" cx="297.1" cy="391.9" r="9.9"/>
+      <line class="st1" x1="276.7" y1="414.4" x2="317.5" y2="414.4"/>
+      <path class="st2" d="M 324.2 440.1 C 324.2 440.1 314.3 459.9 297.1 459.9 C 278.6 459.9 271 440.1 271 440.1 C 271 440.1 279.8 459.9 297.1 459.9 C 314.4 459.9 324.2 440.1 324.2 440.1 Z"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="17.2003 325.9451 554.05 167.449" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .cls-1 {
+        letter-spacing: .04em;
+      }
+
+      .cls-2 {
+        fill: #fff;
+        font-family: 'monospace', TwCenMT-Regular, 'Tw Cen MT';
+        font-size: 308px;
+      }
+
+      .cls-3 {
+        stroke-linejoin: round;
+      }
+
+      .cls-3, .cls-4 {
+        stroke-width: 8px;
+      }
+
+      .cls-3, .cls-4, .cls-5 {
+        fill: none;
+        stroke: #fff;
+        stroke-linecap: round;
+      }
+
+      .cls-6 {
+        letter-spacing: .04em;
+      }
+
+      .cls-7 {
+        letter-spacing: .08em;
+      }
+
+      .cls-4, .cls-5 {
+        stroke-miterlimit: 10;
+      }
+
+      .cls-5 {
+        stroke-width: 13px;
+      }
+    </style>
+  </defs>
+  <g style="transform-origin: 275.62px 418.565px;" transform="matrix(1.393555998802, -0.001114999992, 0, 1.393555998802, 18.605317690366, -9.418606065887)">
+    <text class="cls-2" style="white-space: pre; font-size: 108px;" x="76.83" y="455.18">Anchor</text>
+    <g>
+      <line class="cls-5" x1="447.26" y1="452.83" x2="447.26" y2="406.94"/>
+      <circle class="cls-4" cx="447.26" cy="391.36" r="9.89"/>
+      <line class="cls-4" x1="426.87" y1="413.94" x2="467.65" y2="413.94"/>
+      <path class="cls-3" d="M474.41,439.64s-9.85,19.78-27.14,19.78c-18.51,0-26.07-19.78-26.07-19.78,0,0,8.78,19.78,26.07,19.78s27.14-19.78,27.14-19.78Z"/>
+    </g>
+  </g>
+</svg>
