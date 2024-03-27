@@ -2,8 +2,8 @@
     <div id="task_container">
         <h1 style="color: var(--text-colour-alt); margin-left: 20px;" v-if="data.length == 0">There seems to be no results, try
             another filter set or create an event with the button in the bottom right.</h1>
-        <cardView :data = data @remove="remove_event" @update = "update_event" v-if="view == 'Card'"/>
-        <tableView :data = data @remove="remove_event" @update = "update_event" v-if="view == 'Table'"/>
+        <cardView :data = data @remove="remove_event" @update = "update_event" v-if="view == 'Card' && data.length != 0"/>
+        <tableView :data = data @remove="remove_event" @update = "update_event" v-if="view == 'Table' && data.length != 0"/>
         <div id="task_side_bar">
             <filter_tasks id="filter_button" @apply_filter = "apply_filter"/>
         </div>
