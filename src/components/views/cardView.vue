@@ -22,10 +22,6 @@
 
 <style scoped>
     #card_container{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
         width: 100%;
         height: 100%;
 
@@ -90,6 +86,12 @@
             font-size: 4vw;
             width: 90%;
             min-height: 150px;
+        }
+        
+        #card_container{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
     }
 </style>
