@@ -1,68 +1,74 @@
 <template>
-    <ul class="nav nav-tabs">
-        <li class="nav-item">
-            <button class="nav-link" :class="{ active: tab == 'All' }"
-                @click="() => { tab = 'All', this.$emit('view', 'All') }">All</button>
-        </li>
-        <li class="nav-item">
-            <button class="nav-link" :class="{ active: tab == 'Urgent' }"
-                @click="() => { tab = 'Urgent', this.$emit('view', 4) }">Urgent</button>
-        </li>
-        <li class="nav-item">
-            <button class="nav-link" :class="{ active: tab == 'High' }"
-                @click="() => { tab = 'High', this.$emit('view', 3) }">High</button>
-        </li>
-        <li class="nav-item">
-            <button class="nav-link" :class="{ active: tab == 'Medium' }"
-                @click="() => { tab = 'Medium', this.$emit('view', 2) }">Medium</button>
-        </li>
-        <li class="nav-item">
-            <button class="nav-link" :class="{ active: tab == 'Low' }"
-                @click="() => { tab = 'Low', this.$emit('view', 1) }">Low</button>
-        </li>
-        <li class="nav-item">
-            <button class="nav-link" :class="{ active: tab == 'Completed' }"
-                @click="() => { tab = 'Completed', this.$emit('view', 'Completed') }">Completed</button>
-        </li>
-    </ul>
-    <h1 style="color: var(--text-colour-alt); margin-left: 20px;" v-if="info.length == 0">There seems to be no results, try
-        another filter set or create an event with the button in the bottom right.</h1>
-    <div class="card" id="task_div" v-for="item in info">
-        <div class="card-header" id="task_header">
-            <p class="task_info">{{ item.dateCreated }}</p>
-            <p class="task_info" id="task_urgency">{{ item.urgency }}</p>
-            <select id="status_select" class="form-select form-select-sm" v-model="item.status"
-                @change="this.$emit('updateS', item.id, item.status)">
-                <option selected>Not-Started</option>
-                <option>In-Progress</option>
-                <option>To Discuss</option>
-                <option>Stuck</option>
-            </select>
-            <button  id="close_button" @click="this.$emit('remove', item.id)">X</button>
-        </div>
-        <div class="card-text m-2" style="color: var(--text-colour);">
-            <p>{{ item.description }}</p>
+    <div id="task_container">
+        <h1 style="color: var(--text-colour-alt); margin-left: 20px;" v-if="data.length == 0">There seems to be no results, try
+            another filter set or create an event with the button in the bottom right.</h1>
+        <cardView :data = data @remove="remove_event" @update = "update_event" v-if="view == 'Card'"/>
+        <tableView :data = data @remove="remove_event" @update = "update_event" v-if="view == 'Table'"/>
+        <div id="task_side_bar">
+            <filter_tasks id="filter_button" @apply_filter = "apply_filter"/>
         </div>
     </div>
 </template>
 
 <script>
+import filter_tasks from "./filter_tasks.vue"
+import cardView from "./views/cardView.vue"
+import tableView from "./views/tableView.vue"
+import { firebaseGetEvents, firebaseRemoveEvent, firebaseUpdateEvent, current_query, firebaseSetQueryUrgency } from "../firebase.js"
+
+import { onSnapshot } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js"
+
 export default {
-    mounted: function () {
-        this.$emit('view', 'All')
+    mounted: async function () {
+        this.data = await firebaseGetEvents()
+        this.view_events_listener()
+        if (localStorage.getItem("view") != null){
+            this.view = localStorage.getItem("view")
+        }
     },
-    props: {
-        info: [],
+    methods : {
+        remove_event : function(id){
+            firebaseRemoveEvent(id)
+        },
+
+        update_event : function(id, status){
+           firebaseUpdateEvent(id, status)
+        },
+
+        view_events_listener : function(){
+           onSnapshot(current_query, (snapshot) => { //Yet to figure out way to move this to firebase.js
+                let newData = [];
+                snapshot.forEach((doc) => {
+                    let current_doc = doc.data();
+                    current_doc["id"] = doc.id;
+                    newData.push(current_doc);
+                });
+                this.data = newData;
+            });
+        },
+        apply_filter : async function(new_urgency, new_view){
+            firebaseSetQueryUrgency(new_urgency)
+            this.data = await firebaseGetEvents()
+            localStorage.setItem("view", new_view)
+            this.view = new_view
+        }
     },
     data: () => {
         return {
-            tab: "All"
+            tab: "All",
+            view: "Card",
+            data: []
         }
+    },
+    components: {
+        filter_tasks,
+        cardView,
+        tableView
     }
 }
 </script>
 
-<style>
+<style scoped>
 .nav-link{
     color: var(--text-colour-alt) !important;
 }
@@ -73,57 +79,29 @@ export default {
     border-color: var(--secondary-colour) !important;
 }
 
-#task_div {
-    width: 434px;
-    height: 200px;
+#task_container{
+    display: flex;
+    flex-direction: row;
 
-    background-color: var(--primary-colour);
-
-    float: left;
-    margin: 10px;
-
-    transition: background-color 0.5s;
-}
-
-#task_div:hover {
-    background-color: var(--primary-colour-hover);
-}
-
-#task_header {
     width: 100%;
-    height: auto;
+    height: 100%;
+}
 
-    background-color: var(--quaternary-colour);
+#task_side_bar{
+    height: 100%;
+    width: 80px;
+    
+    background-color: var(--secondary-colour);
 
-    color: white;
+    border-left-width: 1px;
+    border-left-color: #00000020;
+    border-left-style: solid;
 
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-}
 
-.task_info{
-    margin: 0px;
-    margin-left: 10px;
-    margin-right: 10px;
-}
-
-#status_select{
-    margin-right: 20px;
-
-    background-color: var(--primary-colour);
-    color: var(--text-colour);
-
-    border-width: 1px;
-    border-color: var(--quaternary-colour);
-}
-
-#close_button{
     margin-left: auto;
-
-    color: var(--text-colour);
-    background-color: #00000000;
-    border: none;
 }
 
 @media only screen and (max-width: 600px) {

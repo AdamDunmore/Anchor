@@ -1,9 +1,11 @@
 <template>
-    <div id="eventMake">
-      <h2 id="EventMake">Create Event</h2>
-      <textarea id="entryDescription" v-model="description" type="text" maxlength="255" placeholder="Description"></textarea> <!--description-->
+    <button id="event_button" @click="show_make_event = true"><img id="plus_image" src="../assets/img/plus.svg"/></button>
+    
+    <div id="eventMake" :class="{active : show_make_event, disabled : !show_make_event}">
+      <h2 v-if="show_make_event" id="EventMake">Create Event</h2>
+      <textarea v-if="show_make_event" id="entryDescription" v-model="description" type="text" maxlength="255" placeholder="Description"></textarea> <!--description-->
       
-      <div id="urgencyDiv">
+      <div id="urgencyDiv" v-if="show_make_event">
         <h3 id="textUrgency">Urgency</h3>
         <select v-model="urgency" id="entryUrgency">
           <option value="1">Low</option>
@@ -12,34 +14,67 @@
           <option value="4">Urgent</option>
         </select> <!--Urgent 1-4-->
       </div>
-      <button id="submitButton" @click="() => {method(); changeMakeEvent();}">Submit</button> <!--Send request-->
-      <button id="closeButton" @click="method">Close</button>
+      <button id="submitButton" v-if="show_make_event" @click="() => {changeMakeEvent(); show_make_event = true}">Submit</button> <!--Send request-->
+      <button id="closeButton" v-if="show_make_event" @click="show_make_event = false">Close</button>
     </div>
 </template>
 
 <style>
-   #eventMake{
+ #event_button{
+    width: 40px;
+    height: 40px;
+
+    border-radius: 90px;
+    border-width: 0px;
+
+    padding: 0px;
+
+    position: absolute;
+    right: 30px;
+    bottom: 30px;
+
+    background-color: var(--tertiary-colour);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: background-color 0.5s;
+  }
+
+  #event_button:hover{
+    background-color: var(--tertiary-colour-hover);
+  }
+
+  #plus_image{
+    width: 60%;
+    height: 60%;
+
+    color: #fff;
+  }
+
+
+  #eventMake{
     position: absolute;
     right: 15px;
     bottom: 15px;
 
     padding: 10px;
 
-    
     border-radius: 15px;
     
     overflow: hidden;
     
-    transition: width 0.5s, height 0.5s, background-color 0.5s;
+    transition: background-color .5s, width .5s, height .5s;
   }
-  
-  .makeEventOn{
+
+  #eventMake.active{
     width: 400px;
     height: 240px;
     background-color: var(--primary-colour);
   }
 
-  .makeEventOff{
+  #eventMake.disabled{
     width: 0px;
     height: 0px;
     background-color: #ffffff00;
@@ -169,13 +204,12 @@
 </style>
 
 <script>
-    export default{
-        props: {
-            method : null
-        },
+    import { firebaseAddEvent } from "../firebase.js"
+
+    export default {
         methods: {
             changeMakeEvent : function(){
-                this.$emit("newEvent", this.description, this.urgency)
+                firebaseAddEvent(this.description, this.urgency)
                 this.description = ""
                 this.urgency = 1
             }
@@ -185,6 +219,8 @@
             return{
                 description : "",
                 urgency : 1,
+
+                show_make_event: false
             }
         }
     }

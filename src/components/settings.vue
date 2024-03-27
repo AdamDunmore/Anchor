@@ -11,18 +11,7 @@
 </template>
 
 <script>
-import userIDStore from '../stores/userid'
-import {getAuth, signOut} from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js"
-
-const firebaseConfig = {
-    apiKey: "AIzaSyDJybtBVlBPZs80Tip-6buGfZr-TT8U2fo",
-    authDomain: "tuesday-920c6.firebaseapp.com",
-    projectId: "tuesday-920c6",
-    storageBucket: "tuesday-920c6.appspot.com",
-    messagingSenderId: "840991250435",
-    appId: "1:840991250435:web:d116a93daab1cef677d636",
-    measurementId: "G-DJ8QN6LY7R"
-};
+import { firebaseSignOut } from "../firebase.js"
 
 export default {
     mounted: function () {
@@ -75,11 +64,9 @@ export default {
                 root.style.setProperty("--border-colour", '#19639F')
             }
         },
-        logout : function(){
-            let auth = getAuth()
-            signOut(auth).then(() => {
-                this.$router.push({ name: "Login" })
-            }).catch((error) => {alert(error)})
+        logout : async function(){
+            await firebaseSignOut()
+            this.$router.push({ name: "Login" })
         }
     }
 }

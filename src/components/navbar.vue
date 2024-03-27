@@ -1,7 +1,7 @@
 <template>
     <nav class="nav justify-content-start align-items-center p-2" style="background-color: var(--primary-colour);">
       <div id="logo_container"><img id="sidebar_logo" src="../assets/img/logo_with_text_white.png"></div>
-      <select class="mobile" v-model="tab" id="tab" @change="this.$emit('seeEvent', tab)">
+      <select class="mobile" v-model="tab" id="tab">
         <option value="Main">Main</option>
         <option value="All">All</option>
         <option value=4>Urgent</option>
