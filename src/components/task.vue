@@ -20,6 +20,7 @@ import { onSnapshot } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-f
 
 export default {
     mounted: async function () {
+        firebaseSetQueryUrgency(0)
         this.data = await firebaseGetEvents()
         this.view_events_listener()
         if (localStorage.getItem("view") != null){
