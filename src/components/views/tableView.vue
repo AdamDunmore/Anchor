@@ -24,25 +24,6 @@
       </tr>
     </table>
   </div>
-
-    <!-- <div id="mobileDataContainer">
-      <div class="mobileDataSection" v-for="item in data">
-        <div id="mobileDataSectionTitleBar">
-          <p id="mobileUrg">{{ item.urgency }}</p>
-          <p id="mobileDate">{{ item.dateCreated }}</p>
-          <select id="statusSelect" v-model="item.status" @change="this.$emit('updateS',item.id, item.status)">
-            <option>Not-Started</option>
-            <option>In-Progress</option>
-            <option>To Discuss</option>
-            <option>Stuck</option>
-          </select>
-          <div id="dataButton">
-            <button class="mobileDataSectionButton" @click="this.$emit('remove', item.id)" id="deleteButton">X</button>
-          </div>
-        </div>
-        <p id="mobileDesc">{{ item.description }}</p>
-      </div>
-    </div> -->
 </template>
 
 <style scoped>
@@ -119,82 +100,11 @@
     background-color: var(--primary-colour-hover);
   }
 
-
-#mobileDesc{
-  margin-left: 5px;
-}
-
 @media only screen and (max-width: 600px) { /*Mobile Only*/
     table{
-      display: none;
-    }
-
-    #mobileDataContainer{
-      padding: 5px;
-
-      height: calc(100% - 10px);
-
-      overflow-y: scroll;
-    }
-
-    .mobileDataSection{
-      width: 100%;
-      height: auto;
-
-      border-radius:8px;
-
-      margin-bottom: 10px;
-
-      padding: 0px;
-
-      background-color: var(--primary-colour);
-
-      display: flex;
-      flex-direction: column;
-    }
-
-    #mobileDataSectionTitleBar{
-      height: 30px;
       width: 100%;
 
-      background-color: var(--primary-colour-hover);
-
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-
-      position: relative;
-    }
-
-    #statusSelect{
-      margin-left: 10px;
-
-      width: 90px;
-
-      border: none;
-
-      background-color: var(--primary-colour-hover);
-
-      color: var(--text-colour);
-    }
-
-    #mobileUrg{
-      margin-left: 10px;
-      margin-right: 10px
-    }
-
-    #dataButton{
-      margin-left: auto;
-    }
-
-    #deleteButton{
-      background-color: var(--primary-colour-hover);
-    }
-  }
-
-  @media only screen and (min-width: 600px) { /*PC only*/
-    #mobileDataContainer{
-      display: none;
+      font-size: .7rem;
     }
   }
 </style>

@@ -14,7 +14,7 @@
           <option value="4">Urgent</option>
         </select> <!--Urgent 1-4-->
       </div>
-      <button id="submitButton" v-if="show_make_event" @click="() => {changeMakeEvent(); show_make_event = true}">Submit</button> <!--Send request-->
+      <button id="submitButton" v-if="show_make_event" @click="() => {changeMakeEvent(); show_make_event = false}">Submit</button> <!--Send request-->
       <button id="closeButton" v-if="show_make_event" @click="show_make_event = false">Close</button>
     </div>
 </template>
@@ -158,9 +158,9 @@
       margin-right: 10px;
     }
     
-    .makeEventOn{
-      width: calc(100% - 60px);
-      height: 300px;
+    #eventMake.active{
+      width: calc(100% - 40px);
+      height: 280px;
     }
 
     #entryDescription{

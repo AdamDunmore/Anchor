@@ -1,14 +1,9 @@
 <template>
     <nav class="nav justify-content-start align-items-center p-2" style="background-color: var(--primary-colour);">
       <div id="logo_container"><img id="sidebar_logo" src="../assets/img/logo_with_text_white.png"></div>
-      <select class="mobile" v-model="tab" id="tab">
-        <option value="Main">Main</option>
-        <option value="All">All</option>
-        <option value=4>Urgent</option>
-        <option value=3>High</option>
-        <option value=2>Medium</option>
-        <option value=1>Low</option>
-        <option value="Completed">Completed</option>
+      <select class="mobile" v-model="tab" id="tab" @change="() => {this.$emit('changeTab', tab)}">
+        <option value="Home" selected >Home</option>
+        <option value="Tasks">Tasks</option>
       </select> <!--Urgent 1-4-->
  
       <div class="btn-group" role="group">

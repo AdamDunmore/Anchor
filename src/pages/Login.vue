@@ -87,7 +87,7 @@ export default {
 
 <template>
     <div id="Page">
-        <div id="Login" class="card w-25 p-1 justify-content-center">
+        <div id="Login" class="card p-1 justify-content-center">
             <div class="card-header">
                 <h1 id="Title">Anchor</h1>
             </div>
@@ -150,6 +150,7 @@ export default {
 
 #Login {
     background-color: var(--primary-colour);
+    width: 25%;
 }
 
 #Title {

@@ -42,8 +42,8 @@
         
         margin: 10px;
 
-        width: 70px;
-        height: 70px;
+        aspect-ratio: 1 / 1;
+        width: 100%;
     }
 
     #filter_button:hover{

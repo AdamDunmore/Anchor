@@ -114,5 +114,8 @@ export default {
         font-size: 4vw;
     }
 
+    #task_side_bar{
+        width: 10%;
+    }
 }
 </style>
