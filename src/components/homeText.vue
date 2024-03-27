@@ -11,4 +11,14 @@
         margin-left: 20px;
         color: var(--text-colour-alt);
     }
+
+    @media only screen and (max-width: 600px) {
+        #MainBoard{
+            display: block;
+        }
+
+        .MainText{
+            margin-top: 10px;
+        }
+    }
 </style>
