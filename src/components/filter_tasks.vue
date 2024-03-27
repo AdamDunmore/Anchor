@@ -6,7 +6,7 @@
     <div id="filter_menu"></div>
         <div class="modal" id="filter_modal">
             <div class="modal-dialog">
-                <div class="modal-content">
+                <div class="modal-content" id="filter_modal_container">
                     <div class="modal-header">
                         <div class="modal-title"></div>
                     </div>
@@ -35,6 +35,9 @@
 </template>
 
 <style scoped>
+    #filter_modal_container{
+        background-color: var(--secondary-colour-hover);
+    }
     #filter_button{
         background-color: #00000000;
 
