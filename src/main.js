@@ -6,6 +6,9 @@ import { createApp } from 'vue'
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap"
 
+import ToastPlugin from "vue-toast-notification";
+import "vue-toast-notification/dist/theme-bootstrap.css"
+
 import Main from './pages/Main.vue'
 import Login from './pages/Login.vue'
 
@@ -27,4 +30,5 @@ export default router
 
 app.use(router)
 app.use(userIDStore)
+app.use(ToastPlugin)
 app.mount('#app')

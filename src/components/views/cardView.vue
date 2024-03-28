@@ -11,7 +11,7 @@
                 <option value="To Discuss">To Discuss</option>
                 <option value="Stuck">Stuck</option>
             </select>
-            <button  id="close_button" @click="this.$emit('remove', item.id)">X</button>
+            <button  id="close_button" @click="() => {deleteEvent(item.id)}">X</button>
         </div>
         <div class="card-text m-2" style="color: var(--text-colour);">
           <p @click="editing_card = item.id" v-if="editing_card !== item.id">{{ item.description }}</p>
@@ -27,7 +27,7 @@
         width: 100%;
         height: 100%;
 
-        overflow-y: scroll
+        overflow-y: scroll;
     }
 
     #task_div {
@@ -121,6 +121,8 @@
 
 <script>
 import {firebaseUpdateEvent} from "@/firebase.js";
+import {useToast} from "vue-toast-notification";
+
 export default {
     props: {
         data : [],
@@ -129,6 +131,10 @@ export default {
   methods: {
       updateEvent: function (id, status, description){
         firebaseUpdateEvent(id, status, description)
+      },
+      deleteEvent: function (id){
+        useToast().success('Event deleted successfully!')
+        this.$emit('remove', id)
       }
   }
 }

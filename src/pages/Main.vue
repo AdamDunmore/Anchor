@@ -64,6 +64,8 @@
   height: 97vh;
 
   background-color: var(--secondary-colour);
+
+  overflow-y: scroll;
 }
 
 @media only screen and (max-width: 600px) { /*Mobile Only*/
@@ -78,8 +80,6 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-
-    overflow-y: scroll;
   }
 }
 </style>
