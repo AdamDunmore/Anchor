@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, setPersistence, browserLocalPersistence, onAuthStateChanged, inMemoryPersistence, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js" //GoogleAuthProvider, signInWithPopup
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, setPersistence, browserLocalPersistence, onAuthStateChanged, inMemoryPersistence, signOut,GoogleAuthProvider,signInWithPopup } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js"
 import {  getFirestore, collection, addDoc, deleteDoc, doc, onSnapshot, query, where, updateDoc, orderBy } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js"
 //https://firebase.google.com/docs/web/learn-more#libraries-cdn
 
@@ -26,6 +26,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig)
 let auth = getAuth(app)
+let google_auth = new GoogleAuthProvider()
 const firestore = getFirestore(app)
 let user_id;
 const events_collection = collection(firestore, "events")
@@ -49,6 +50,18 @@ export let firebaseLogin = function(email, password){
                 .catch(error => {
                     reject(error) 
                 })
+    })
+}
+
+export let firebaseSignInWithGoogle = function (){
+    return new Promise(function( resolve, reject) {
+        signInWithPopup(auth, google_auth)
+            .then(p => {
+                resolve(p)
+            })
+            .catch(error => {
+                reject(error)
+            })
     })
 }
 

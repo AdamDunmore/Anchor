@@ -5,7 +5,7 @@ import {  onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.5.2/f
 
 import { Modal } from "bootstrap";
 
-import { firebaseCreateAccount, firebaseLogin, firebaseReturnAuth, firebaseSetPersistance } from "../firebase";
+import { firebaseCreateAccount, firebaseLogin, firebaseReturnAuth, firebaseSetPersistance, firebaseSignInWithGoogle } from "../firebase";
 
 // Initialize Firebase
 const auth = firebaseReturnAuth()
@@ -63,9 +63,6 @@ export default {
             if (this.remember_me) { await firebaseSetPersistance("RememberMe") }
             else { await firebaseSetPersistance("noRememberMe") }
             firebaseLogin(this.email_data, this.password_data)
-                .then((data) => {
-                    console.log(data);
-                })
                 .catch((error) => {
                     if (error.toString() == "FirebaseError: Firebase: Error (auth/invalid-login-credentials).") {
                         this.errorText = "Invalid Credentials, try again" //Incorrect details
@@ -75,6 +72,21 @@ export default {
                         console.log(error.toString())
                     }
                 })
+        },
+
+        login_with_google: async function(){
+          if (this.remember_me) { await firebaseSetPersistance("RememberMe") }
+          else { await firebaseSetPersistance("noRememberMe") }
+          firebaseSignInWithGoogle()
+              .catch((error) => {
+                if (error.toString() == "FirebaseError: Firebase: Error (auth/invalid-login-credentials).") {
+                  this.errorText = "Invalid Credentials, try again" //Incorrect details
+                  this.openModal()
+                }
+                else {
+                  console.log(error.toString())
+                }
+              })
         },
 
         openModal: function () {
@@ -108,6 +120,10 @@ export default {
                 <div class="btn-group" role="group" id="form_loginButtons">
                     <button type="button" class="btn btn-light" @click="login">Login</button>
                     <button type="button" class="btn btn-light" @click="attempt_login">Sign-up</button>
+                </div>
+
+                <div class="btn-group" role="group" id="form_loginButtons">
+                  <button type="button" class="btn btn-light" @click="login_with_google">Login with Google</button>
                 </div>
 
                 <div class="form-check" id="form_rememberMe">
@@ -163,6 +179,8 @@ export default {
 
 #form_loginButtons {
     width: 100%;
+
+    margin-top: 4px;
 }
 
 #form_rememberMe {
