@@ -118,8 +118,9 @@ export let firebaseRemoveEvent = async function(id){
     await deleteDoc(doc(firestore, "events", id))
 }
 
-export let firebaseUpdateEvent = async function(event_id, new_status){
+export let firebaseUpdateEvent = async function(event_id, new_status, new_description){
     await updateDoc(doc(firestore, "events", event_id), {
-        status : new_status
+        status : new_status,
+        description : new_description
       })
 }

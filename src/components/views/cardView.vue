@@ -5,16 +5,18 @@
                 <p class="task_info">{{ item.dateCreated }}</p>
                 <p class="task_info" id="task_urgency">{{ item.urgency }}</p>
                 <select id="status_select" class="form-select form-select-sm" v-model="item.status"
-                @change="this.$emit('update', item.id, item.status)">
-                <option selected>Not-Started</option>
-                <option>In-Progress</option>
-                <option>To Discuss</option>
-                <option>Stuck</option>
+                @change="this.$emit('update', item.id, item.status, item.description)">
+                <option value="Not-Started" selected>Not-Started</option>
+                <option value="In-Progress">In-Progress</option>
+                <option value="To Discuss">To Discuss</option>
+                <option value="Stuck">Stuck</option>
             </select>
             <button  id="close_button" @click="this.$emit('remove', item.id)">X</button>
         </div>
         <div class="card-text m-2" style="color: var(--text-colour);">
-            <p>{{ item.description }}</p>
+          <p @click="editing_card = item.id" v-if="editing_card !== item.id">{{ item.description }}</p>
+          <textarea autofocus id="card_textarea" v-model = item.description v-if="editing_card === item.id">{{ item.description }}</textarea>
+          <button id="card_editing_apply" v-if="editing_card === item.id" @click="() => {updateEvent(item.id, item.status, item.description); editing_card = 'none'}">Confirm</button>
         </div>
         </div>
     </div>
@@ -73,6 +75,27 @@
         border-color: var(--quaternary-colour);
     }
 
+    #card_textarea{
+      width: 100%;
+      height: 100%;
+      background-color: var(--primary-colour-hover);
+      color: var(--text-colour);
+      border: none;
+      resize: none;
+    }
+
+    #card_editing_apply{
+      margin-top: 4px;
+
+      background-color: var(--quaternary-colour);
+      color: var(--text-colour);
+
+      border: none;
+      border-radius: 10px;
+
+      padding: 5px;
+    }
+
     #close_button{
         margin-left: auto;
 
@@ -97,9 +120,16 @@
 </style>
 
 <script>
-    export default {
-        props: {
-            data : []
-        }
-    }
+import {firebaseUpdateEvent} from "@/firebase.js";
+export default {
+    props: {
+        data : [],
+        editing_card: "none"
+    },
+  methods: {
+      updateEvent: function (id, status, description){
+        firebaseUpdateEvent(id, status, description)
+      }
+  }
+}
 </script>

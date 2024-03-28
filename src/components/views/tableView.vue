@@ -13,7 +13,7 @@
         <td class="table_item table_data">{{ item.urgency }}</td>
         <td class="table_item table_data">{{ item.dateCreated }}</td>
         <td class="table_item table_data" style="min-width: 100px; padding: 0px;">
-          <select id="tableStatus" v-model="item.status" @change="this.$emit('update',item.id, item.status)">
+          <select id="tableStatus" v-model="item.status" @change="this.$emit('update',item.id, item.status, item.description)">
             <option>Not-Started</option>
             <option>In-Progress</option>
             <option>To Discuss</option>

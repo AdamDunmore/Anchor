@@ -32,8 +32,8 @@ export default {
             firebaseRemoveEvent(id)
         },
 
-        update_event : function(id, status){
-           firebaseUpdateEvent(id, status)
+        update_event : function(id, status, description){
+           firebaseUpdateEvent(id, status, description)
         },
 
         view_events_listener : function(){
