@@ -19,7 +19,7 @@ import { firebaseGetEvents, firebaseRemoveEvent, firebaseUpdateEvent, current_qu
 import { onSnapshot } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js"
 
 export default {
-    mounted: async function () {
+    created: async function () {
         firebaseSetQueryUrgency(0)
         this.data = await firebaseGetEvents()
         this.view_events_listener()

@@ -82,6 +82,8 @@ export default {
     bottom: 0px;
     left: 200px;
 
+    z-index: 100;
+
     width: 400px;
 
     display: flex;
@@ -94,14 +96,18 @@ export default {
 
     border-top-left-radius: 40px;
     border-top-right-radius: 40px;
+    border-color: var(--quaternary-colour);
+    border-width: 2px;
 }
 
 .settings_on {
     height: 200px;
+    border-style: solid;
 }
 
 .settings_off {
     height: 0px;
+    border-style: none;
 }
 
 .settings_row {

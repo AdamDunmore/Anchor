@@ -62,6 +62,8 @@
     padding: 10px;
 
     border-radius: 15px;
+    border-width: 2px;
+    border-color: var(--quaternary-colour);
     
     overflow: hidden;
     
@@ -72,12 +74,14 @@
     width: 400px;
     height: 240px;
     background-color: var(--primary-colour);
+    border-style: solid;
   }
 
   #eventMake.disabled{
     width: 0px;
     height: 0px;
     background-color: #ffffff00;
+    border-style: none;
   }
 
   #entryDescription{

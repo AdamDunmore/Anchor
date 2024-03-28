@@ -95,7 +95,7 @@ export let firebaseGetEvents = async function(){
 }
 
 export let firebaseSetQueryUrgency = function(new_urgency){
-    if (new_urgency != 0){
+    if (new_urgency !== 0){
         current_query = query(events_collection, where("uid", "==", user_id), where("urgency", "==", new_urgency), orderBy("completed"))
     }
     else{

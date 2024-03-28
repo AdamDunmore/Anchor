@@ -12,6 +12,7 @@
         position: absolute;
         bottom: 0px;
         left: 200px;
+        z-index: 100;
 
         width: 400px;
 
