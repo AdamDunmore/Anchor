@@ -64,12 +64,13 @@ export default {
             else { await firebaseSetPersistance("noRememberMe") }
             firebaseLogin(this.email_data, this.password_data)
                 .catch((error) => {
-                    if (error.toString() == "FirebaseError: Firebase: Error (auth/invalid-login-credentials).") {
+                    if (error.toString() == "FirebaseError: Firebase: Error (auth/invalid-login-credentials)." || error.toString() == "FirebaseError: Firebase: Error (auth/invalid-credential).") {
                         this.errorText = "Invalid Credentials, try again" //Incorrect details
                         this.openModal()
                     }
                     else {
-                        console.log(error.toString())
+                        this.errorText = error
+                        this.openModal()
                     }
                 })
         },
@@ -79,12 +80,13 @@ export default {
           else { await firebaseSetPersistance("noRememberMe") }
           firebaseSignInWithGoogle()
               .catch((error) => {
-                if (error.toString() == "FirebaseError: Firebase: Error (auth/invalid-login-credentials).") {
+                if (error.toString() == "FirebaseError: Firebase: Error (auth/invalid-login-credentials)." || error.toString() == "FirebaseError: Firebase: Error (auth/invalid-credential).") {
                   this.errorText = "Invalid Credentials, try again" //Incorrect details
                   this.openModal()
                 }
                 else {
-                  console.log(error.toString())
+                  this.errorText = error
+                  this.openModal()
                 }
               })
         },
